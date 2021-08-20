@@ -4,6 +4,38 @@ import { useState } from "react";
 
 export function Home() {
   let [error, setError] = useState("");
+  let [success, setSuccess] = useState("");
+
+  let htmlError = (
+    <div className="error" id="status">
+      <h2>{error}</h2>
+      <button
+        onClick={() => {
+          setError("");
+        }}
+        className="cancel"
+      >
+      x
+      </button>
+    </div>
+  );
+
+  let htmlSuccess = (
+    <div className="success" id="status">
+      <h2>{success}</h2>
+      <button
+        onClick={() => {
+          setSuccess("");
+        }}
+        className="cancel"
+      >
+        x
+      </button>
+    </div>
+  );
+  if (success === "") htmlSuccess = <div></div>
+  if(error === "") htmlError = <div></div>
+  
   return (
     <div className="home">
       <h1>Link Shortener!</h1>
@@ -18,32 +50,35 @@ export function Home() {
         </div>
         <button
           onClick={() => {
-            submit(setError);
+            submit(setError, setSuccess);
           }}
         >
           Submit
         </button>
       </div>
-      <h2
-        hidden={error === "" ? true : false}
-      >
-        {error}
-      </h2>
+      <br></br>
+      {htmlSuccess}
+      {htmlError}
     </div>
   );
 }
 
-function submit(setError: React.Dispatch<React.SetStateAction<string>>) {
+function submit(
+  setError: React.Dispatch<React.SetStateAction<string>>,
+  setSuccess: React.Dispatch<React.SetStateAction<string>>
+) {
   let original = document.getElementById("original") as HTMLInputElement;
   let shortened = document.getElementById("shortened") as HTMLInputElement;
   let ref = firebase.database().ref(`links/${shortened?.value}`);
   if (original.value === "" || shortened.value === "") {
     setError("Cannot have empty links!");
+    setSuccess("");
     return;
   }
   ref.get().then((snapshot) => {
     if (snapshot.exists()) {
       setError("URL already exists!");
+      setSuccess("");
     } else {
       ref
         .set({
@@ -52,6 +87,7 @@ function submit(setError: React.Dispatch<React.SetStateAction<string>>) {
         })
         .then(() => {
           setError("");
+          setSuccess("Link Created!");
         });
     }
   });

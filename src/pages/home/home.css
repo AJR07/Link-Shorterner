@@ -13,20 +13,38 @@ button{
 }
 
 .form{
-	transition: box-shadow 1s;
 	border-radius: 1vw;
 	padding: 1vw;
 	width: 10vw;
 	text-align: center;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.form:hover{
+.error{
+	background-color: red;
+}
+
+.success{
+	background-color: green;
+}
+
+#status{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: small;
+	padding: 0.5vw;
+	padding-top: 1vw;
+	width: 10vw;
+	text-align: center;
+	display: inline;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 h2{
-	border-radius: 1vw;
-	background-color: red;
-	padding: 1vw;
-	width: 10vw
+	display: inline;
+}
+
+.cancel{
+	display: inline;
+	background-color: transparent;
+	border: 0;
 }

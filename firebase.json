@@ -4,6 +4,7 @@
   },
   "hosting": {
     "public": "build",
+    "site":"link-short",
     "ignore": [
       "firebase.json",
       "**/.*",
