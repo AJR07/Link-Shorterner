@@ -15,7 +15,7 @@ export function Home() {
         }}
         className="cancel"
       >
-      x
+        x
       </button>
     </div>
   );
@@ -33,9 +33,9 @@ export function Home() {
       </button>
     </div>
   );
-  if (success === "") htmlSuccess = <div></div>
-  if(error === "") htmlError = <div></div>
-  
+  if (success === "") htmlSuccess = <div></div>;
+  if (error === "") htmlError = <div></div>;
+
   return (
     <div className="home">
       <h1>Link Shortener!</h1>

@@ -1,50 +1,50 @@
-h1{
-	font-family: Arial, Helvetica, sans-serif;
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h3{
-	font-family: Arial, Helvetica, sans-serif;
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-button{
-	box-shadow: 10vw;
-	border-radius: 10vw;
-	background-color: red;
+button {
+  box-shadow: 10vw;
+  border-radius: 10vw;
+  background-color: red;
 }
 
-.form{
-	border-radius: 1vw;
-	padding: 1vw;
-	width: 10vw;
-	text-align: center;
-	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.form {
+  border-radius: 1vw;
+  padding: 1vw;
+  width: 10vw;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.error{
-	background-color: red;
+.error {
+  background-color: red;
 }
 
-.success{
-	background-color: green;
+.success {
+  background-color: green;
 }
 
-#status{
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: small;
-	padding: 0.5vw;
-	padding-top: 1vw;
-	width: 10vw;
-	text-align: center;
-	display: inline;
-	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+#status {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  padding: 0.5vw;
+  padding-top: 1vw;
+  width: 10vw;
+  text-align: center;
+  display: inline;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-h2{
-	display: inline;
+h2 {
+  display: inline;
 }
 
-.cancel{
-	display: inline;
-	background-color: transparent;
-	border: 0;
+.cancel {
+  display: inline;
+  background-color: transparent;
+  border: 0;
 }

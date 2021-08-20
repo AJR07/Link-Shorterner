@@ -4,12 +4,8 @@
   },
   "hosting": {
     "public": "build",
-    "site":"link-short",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "site": "link-short",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
