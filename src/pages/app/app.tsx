@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   useParams,
 } from "react-router-dom";
 import { Home } from "../home/home";
@@ -32,7 +31,7 @@ function Links() {
       val.clicks += 1;
       ref.set(val).then(() => {
         //redirect
-        window.location.href = val.direct;
+        window.location.replace(val.direct);
       });
     } else {
       window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";

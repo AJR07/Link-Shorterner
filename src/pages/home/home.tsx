@@ -74,6 +74,13 @@ function submit(
     setError("Cannot have empty links!");
     setSuccess("");
     return;
+  } else if (
+    !original.value.includes("http://") ||
+    !original.value.includes("https://")
+  ) {
+    setError("Must contain `http://` so it redirects properly!!");
+    setSuccess("");
+    return;
   }
   ref.get().then((snapshot) => {
     if (snapshot.exists()) {
