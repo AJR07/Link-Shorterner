@@ -1,0 +1,32 @@
+h1{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h3{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+button{
+	box-shadow: 10vw;
+	border-radius: 10vw;
+	background-color: red;
+}
+
+.form{
+	transition: box-shadow 1s;
+	border-radius: 1vw;
+	padding: 1vw;
+	width: 10vw;
+	text-align: center;
+}
+
+.form:hover{
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+h2{
+	border-radius: 1vw;
+	background-color: red;
+	padding: 1vw;
+	width: 10vw
+}
