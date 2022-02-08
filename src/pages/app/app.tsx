@@ -14,7 +14,7 @@ export function App() {
   if (noExist) {
     return (
       <div id="id">
-        <h1 style={{color:"red"}}>ERROR 404</h1>
+        <h1 style={{ color: "red" }}>ERROR 404</h1>
         <h2>Link doesn't exist, or does it :)</h2>
       </div>
     );
@@ -34,7 +34,9 @@ export function App() {
   );
 }
 
-function Links(props: {setNoExist: React.Dispatch<React.SetStateAction<boolean>>}) {
+function Links(props: {
+  setNoExist: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   let { link } = useParams() as { link: string };
   let ref = firebase.database().ref(`links/${link}`);
   ref.get().then((snapshot) => {
@@ -54,7 +56,7 @@ function Links(props: {setNoExist: React.Dispatch<React.SetStateAction<boolean>>
   });
   return (
     <div id="id">
-      <h1 style={{color:"green"}}>Searching...</h1>
+      <h1 style={{ color: "green" }}>Searching...</h1>
       <h2>Please be patient...</h2>
     </div>
   );

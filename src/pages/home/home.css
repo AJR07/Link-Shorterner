@@ -1,4 +1,4 @@
-#submit{
+#submit {
   margin-top: 1vw;
   border-radius: 0.5vw;
   border-width: 0.25vw;
@@ -7,14 +7,14 @@
   background-color: white;
 }
 
-#submit:hover{
+#submit:hover {
   background-color: rgb(253, 247, 240);
 }
 
-.error{
+.error {
   color: rgb(158, 3, 3);
 }
 
-.success{
+.success {
   color: rgb(16, 158, 3);
 }
