@@ -1,50 +1,20 @@
-h1 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h3 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-button {
-  box-shadow: 10vw;
-  border-radius: 10vw;
-  background-color: red;
-}
-
-.form {
-  border-radius: 1vw;
-  padding: 1vw;
-  width: 10vw;
-  text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-.error {
-  background-color: red;
-}
-
-.success {
-  background-color: green;
-}
-
-#status {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
+#submit{
+  margin-top: 1vw;
+  border-radius: 0.5vw;
+  border-width: 0.25vw;
+  border-color: black;
   padding: 0.5vw;
-  padding-top: 1vw;
-  width: 10vw;
-  text-align: center;
-  display: inline;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: white;
 }
 
-h2 {
-  display: inline;
+#submit:hover{
+  background-color: rgb(253, 247, 240);
 }
 
-.cancel {
-  display: inline;
-  background-color: transparent;
-  border: 0;
+.error{
+  color: rgb(158, 3, 3);
+}
+
+.success{
+  color: rgb(16, 158, 3);
 }

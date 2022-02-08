@@ -9,30 +9,15 @@ export function Home() {
   let htmlError = (
     <div className="error" id="status">
       <h2>{error}</h2>
-      <button
-        onClick={() => {
-          setError("");
-        }}
-        className="cancel"
-      >
-        x
-      </button>
     </div>
   );
 
   let htmlSuccess = (
     <div className="success" id="status">
       <h2>{success}</h2>
-      <button
-        onClick={() => {
-          setSuccess("");
-        }}
-        className="cancel"
-      >
-        x
-      </button>
     </div>
   );
+
   if (success === "") htmlSuccess = <div></div>;
   if (error === "") htmlError = <div></div>;
 
@@ -52,6 +37,7 @@ export function Home() {
           onClick={() => {
             submit(setError, setSuccess);
           }}
+          id="submit"
         >
           Submit
         </button>
@@ -69,19 +55,19 @@ function submit(
 ) {
   let original = document.getElementById("original") as HTMLInputElement;
   let shortened = document.getElementById("shortened") as HTMLInputElement;
-  let ref = firebase.database().ref(`links/${shortened?.value}`);
   if (original.value === "" || shortened.value === "") {
     setError("Cannot have empty links!");
     setSuccess("");
     return;
   } else if (
-    !original.value.includes("http://") ||
+    !original.value.includes("http://") &&
     !original.value.includes("https://")
   ) {
     setError("Must contain `http://` so it redirects properly!!");
     setSuccess("");
     return;
   }
+  let ref = firebase.database().ref(`links/${shortened?.value}`);
   ref.get().then((snapshot) => {
     if (snapshot.exists()) {
       setError("URL already exists!");

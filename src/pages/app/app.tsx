@@ -6,13 +6,25 @@ import {
 } from "react-router-dom";
 import { Home } from "../home/home";
 import firebase from "firebase";
+import { useState } from "react";
 
 export function App() {
+  let [noExist, setNoExist] = useState(false);
+
+  if (noExist) {
+    return (
+      <div id="id">
+        <h1 style={{color:"red"}}>ERROR 404</h1>
+        <h2>Link doesn't exist, or does it :)</h2>
+      </div>
+    );
+  }
+
   return (
     <Router>
       <Switch>
         <Route path="/:link">
-          <Links></Links>
+          <Links setNoExist={setNoExist}></Links>
         </Route>
         <Route path="/">
           <Home></Home>
@@ -22,7 +34,7 @@ export function App() {
   );
 }
 
-function Links() {
+function Links(props: {setNoExist: React.Dispatch<React.SetStateAction<boolean>>}) {
   let { link } = useParams() as { link: string };
   let ref = firebase.database().ref(`links/${link}`);
   ref.get().then((snapshot) => {
@@ -34,8 +46,16 @@ function Links() {
         window.location.replace(val.direct);
       });
     } else {
-      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      setTimeout(() => {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }, 5000);
+      props.setNoExist(true);
     }
   });
-  return <div className="id"></div>;
+  return (
+    <div id="id">
+      <h1 style={{color:"green"}}>Searching...</h1>
+      <h2>Please be patient...</h2>
+    </div>
+  );
 }
