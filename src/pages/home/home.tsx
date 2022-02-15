@@ -68,7 +68,7 @@ function submit(
     return;
   } else if (original.value.includes("link-short.web.app")){
     setError("Cannot redirect to this site. This is to prevent recursive redirects XD");
-    setSucess("");
+    setSuccess("");
     return;
   }
   let ref = firebase.database().ref(`links/${shortened?.value}`);
