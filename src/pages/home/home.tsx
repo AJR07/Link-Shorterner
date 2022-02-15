@@ -66,6 +66,10 @@ function submit(
     setError("Must contain `http://` so it redirects properly!!");
     setSuccess("");
     return;
+  } else if (original.value.includes("link-short.web.app")){
+    setError("Cannot redirect to this site. This is to prevent recursive redirects XD");
+    setSucess("");
+    return;
   }
   let ref = firebase.database().ref(`links/${shortened?.value}`);
   ref.get().then((snapshot) => {
