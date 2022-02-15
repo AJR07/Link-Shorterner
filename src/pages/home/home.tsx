@@ -66,8 +66,10 @@ function submit(
     setError("Must contain `http://` so it redirects properly!!");
     setSuccess("");
     return;
-  } else if (original.value.includes("link-short.web.app")){
-    setError("Cannot redirect to this site. This is to prevent recursive redirects XD");
+  } else if (original.value.includes("link-short.web.app")) {
+    setError(
+      "Cannot redirect to this site. This is to prevent recursive redirects XD"
+    );
     setSuccess("");
     return;
   }
