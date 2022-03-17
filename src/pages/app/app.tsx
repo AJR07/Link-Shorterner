@@ -50,7 +50,7 @@ function Links(props: {
     } else {
       setTimeout(() => {
         window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-      }, 5000);
+      }, 1000);
       props.setNoExist(true);
     }
   });
