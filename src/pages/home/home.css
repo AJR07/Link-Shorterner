@@ -1,16 +1,16 @@
-#create{
-	margin-left: 42.5vw;
-	margin-right: 42.5vw;
+#create {
+  margin-left: 42.5vw;
+  margin-right: 42.5vw;
 }
 
-#error{
-	color:rgba(148, 0, 0, 0.591);
+#error {
+  color: rgba(148, 0, 0, 0.591);
 }
 
-#success{
-	color:rgba(0, 141, 0, 0.634);
+#success {
+  color: rgba(0, 141, 0, 0.634);
 }
 
-#info{
-	color:rgba(120, 120, 120, 0.5);
+#info {
+  color: rgba(120, 120, 120, 0.5);
 }

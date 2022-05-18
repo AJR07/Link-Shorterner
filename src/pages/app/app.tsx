@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "../home/home";
 import "./app.css";
 import Footnote from "../footnote/footnote";
@@ -13,13 +9,13 @@ export function App() {
     <Router>
       <Switch>
         <Route path="/:link">
-          <LinkNoExist/>
+          <LinkNoExist />
         </Route>
         <Route path="/">
           <Home></Home>
         </Route>
       </Switch>
-      <Footnote/>
+      <Footnote />
     </Router>
   );
 }

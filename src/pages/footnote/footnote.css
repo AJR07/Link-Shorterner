@@ -1,8 +1,8 @@
-#footnote{
-	position: fixed;
-	background-color: rgba(0, 131, 0, 0.707);
-	bottom: 0;
-	width: 95vw;
-	padding-left: 2.5vw;
-	padding-right: 2.5vw;
+#footnote {
+  position: fixed;
+  background-color: rgba(0, 131, 0, 0.707);
+  bottom: 0;
+  width: 95vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
 }

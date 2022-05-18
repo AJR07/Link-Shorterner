@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import { useState } from "react";
 import { Stack, TextField } from "@mui/material";
-import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from "@mui/lab/LoadingButton";
 import "./home.css";
 
 export function Home() {
@@ -48,7 +48,7 @@ export function Home() {
             }}
             error={errorShortened}
           />
-          
+
           <LoadingButton
             onClick={() => {
               submit(

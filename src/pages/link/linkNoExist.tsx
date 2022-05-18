@@ -11,7 +11,12 @@ export default function LinkNoExist() {
       <div id="app">
         <h1 style={{ color: "red" }}>ERROR 404</h1>
         <h2>Link doesn't exist.</h2>
-        <LinearProgress variant="determinate" value={100} color="error" className="progress" />
+        <LinearProgress
+          variant="determinate"
+          value={100}
+          color="error"
+          className="progress"
+        />
       </div>
     );
   } else {
