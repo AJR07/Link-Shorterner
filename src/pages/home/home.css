@@ -1,20 +1,4 @@
-#submit {
-  margin-top: 1vw;
-  border-radius: 0.5vw;
-  border-width: 0.25vw;
-  border-color: black;
-  padding: 0.5vw;
-  background-color: white;
-}
-
-#submit:hover {
-  background-color: rgb(253, 247, 240);
-}
-
-.error {
-  color: rgb(158, 3, 3);
-}
-
-.success {
-  color: rgb(16, 158, 3);
+.textfield{
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 }

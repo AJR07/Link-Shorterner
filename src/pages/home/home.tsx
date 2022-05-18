@@ -1,50 +1,46 @@
-import "./home.css";
 import firebase from "firebase";
 import { useState } from "react";
+import { Button, Stack, TextField } from "@mui/material";
+import "./home.css";
 
 export function Home() {
   let [error, setError] = useState("");
   let [success, setSuccess] = useState("");
 
-  let htmlError = (
-    <div className="error" id="status">
-      <h2>{error}</h2>
-    </div>
-  );
-
-  let htmlSuccess = (
-    <div className="success" id="status">
-      <h2>{success}</h2>
-    </div>
-  );
-
-  if (success === "") htmlSuccess = <div></div>;
-  if (error === "") htmlError = <div></div>;
-
   return (
     <div className="home">
       <h1>Link Shortener!</h1>
       <div className="form">
-        <div id="original-container">
-          <h3>Original:</h3>
-          <input type="text" id="original"></input>
-        </div>
-        <div id="shortened-container">
-          <h3>Shortened:</h3>
-          <input type="text" id="shortened"></input>
-        </div>
-        <button
+        <Stack direction="column" className="form-fields" style={{paddingLeft: "3vw", paddingRight: "3vw"}}>
+          <TextField label="Original" variant="outlined" className="textfield"/>
+          <TextField label="Shortened" variant="outlined" className="textfield"/>
+        </Stack>
+        <Button
           onClick={() => {
             submit(setError, setSuccess);
           }}
           id="submit"
         >
           Submit
-        </button>
+        </Button>
       </div>
       <br></br>
-      {htmlSuccess}
-      {htmlError}
+
+      {success !== "" ? (
+        <div className="error" id="status">
+          <h2>{success}</h2>
+        </div>
+      ) : (
+        <></>
+      )}
+
+      {error !== "" ? (
+        <div className="success" id="status">
+          <h2>{error}</h2>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
