@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import { useState } from "react";
-import { Button, Stack, TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 import "./home.css";
 
 export function Home() {
@@ -12,10 +13,15 @@ export function Home() {
   let [errorOriginal, setErrorOriginal] = useState(false);
   let [errorShortened, setErrorShortened] = useState(false);
 
+  let [loading, setLoading] = useState(false);
+
   return (
     <div className="home">
       <h1>Link Shortener</h1>
-      <h3 id="info">"Shortened" is the suffix to the link that will be created: https://link-short.web.app/(your-shortened-link)</h3>
+      <h3 id="info">
+        "Shortened" is the suffix to the link that will be created:
+        https://link-short.web.app/(your-shortened-link)
+      </h3>
       <div className="form">
         <Stack
           direction="column"
@@ -42,17 +48,26 @@ export function Home() {
             }}
             error={errorShortened}
           />
-
-          <Button
+          
+          <LoadingButton
             onClick={() => {
-              submit(setNotif, original, shortened, setErrorOriginal, setErrorShortened);
+              submit(
+                setNotif,
+                original,
+                shortened,
+                setErrorOriginal,
+                setErrorShortened,
+                setLoading
+              );
             }}
             color="success"
             variant="contained"
             id="create"
+            loading={loading}
+            loadingIndicator={"Creating..."}
           >
             Create
-          </Button>
+          </LoadingButton>
         </Stack>
       </div>
       <br></br>
@@ -73,7 +88,8 @@ function submit(
   original: string,
   shortened: string,
   setErrorOriginal: React.Dispatch<React.SetStateAction<boolean>>,
-  setErrorShortened: React.Dispatch<React.SetStateAction<boolean>>
+  setErrorShortened: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   setErrorOriginal(false);
   setErrorShortened(false);
@@ -96,13 +112,14 @@ function submit(
     });
     setErrorOriginal(true);
   } else {
+    setLoading(true);
     let ref = firebase.database().ref(`links/${shortened}`);
     ref.get().then((snapshot) => {
       if (snapshot.exists()) {
         setNotif({ notif: "Shortened has already been taken!", error: true });
         setErrorShortened(true);
-      }
-      else {
+        setLoading(false);
+      } else {
         ref
           .set({
             clicks: 0,
@@ -113,6 +130,7 @@ function submit(
             setTimeout(() => {
               setNotif({ notif: "", error: false });
             }, 1000);
+            setLoading(false);
           });
       }
     });

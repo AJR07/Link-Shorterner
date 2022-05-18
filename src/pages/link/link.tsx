@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import firebase from "firebase";
+import { LinearProgress } from "@mui/material";
+import "./link.css";
 
 export default function Links(props: {
   setNoExist: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,14 +19,14 @@ export default function Links(props: {
     } else {
       setTimeout(() => {
         window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-      }, 100);
+      }, 500);
       props.setNoExist(true);
     }
   });
   return (
     <div>
       <h1 style={{ color: "green" }}>Searching...</h1>
-      <h2>Please be patient...</h2>
+      <LinearProgress color="success" className="progress" />
     </div>
   );
 }
