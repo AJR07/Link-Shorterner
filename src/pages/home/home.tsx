@@ -4,8 +4,7 @@ import { Button, Stack, TextField } from "@mui/material";
 import "./home.css";
 
 export function Home() {
-  let [error, setError] = useState("");
-  let [success, setSuccess] = useState("");
+  let [notif, setNotif] = useState({ notif: "", error: false });
 
   let [original, setOriginal] = useState("");
   let [shortened, setShortened] = useState("");
@@ -16,6 +15,7 @@ export function Home() {
   return (
     <div className="home">
       <h1>Link Shortener</h1>
+      <h3 id="info">"Shortened" is the suffix to the link that will be created: https://link-short.web.app/(your-shortened-link)</h3>
       <div className="form">
         <Stack
           direction="column"
@@ -27,7 +27,9 @@ export function Home() {
             label="Original Link To Shorten"
             variant="outlined"
             className="textfield"
-            onChange={(evt) => { setOriginal(evt.target.value); }}
+            onChange={(evt) => {
+              setOriginal(evt.target.value);
+            }}
             error={errorOriginal}
           />
 
@@ -35,13 +37,15 @@ export function Home() {
             label="Shortened"
             variant="outlined"
             className="textfield"
-            onChange={(evt) => { setShortened(evt.target.value); }}
+            onChange={(evt) => {
+              setShortened(evt.target.value);
+            }}
             error={errorShortened}
           />
 
           <Button
             onClick={() => {
-              submit(setError, setSuccess, original, shortened);
+              submit(setNotif, original, shortened, setErrorOriginal, setErrorShortened);
             }}
             color="success"
             variant="contained"
@@ -53,64 +57,64 @@ export function Home() {
       </div>
       <br></br>
 
-      {success !== "" ? (
-        <div className="error" id="status">
-          <h2>{success}</h2>
-        </div>
+      {notif.error ? (
+        <h2 id="error">{notif.notif}</h2>
       ) : (
-        <></>
-      )}
-
-      {error !== "" ? (
-        <div className="success" id="status">
-          <h2>{error}</h2>
-        </div>
-      ) : (
-        <></>
+        <h2 id="success">{notif.notif}</h2>
       )}
     </div>
   );
 }
 
 function submit(
-  setError: React.Dispatch<React.SetStateAction<string>>,
-  setSuccess: React.Dispatch<React.SetStateAction<string>>,
+  setNotif: React.Dispatch<
+    React.SetStateAction<{ notif: string; error: boolean }>
+  >,
   original: string,
-  shortened: string
+  shortened: string,
+  setErrorOriginal: React.Dispatch<React.SetStateAction<boolean>>,
+  setErrorShortened: React.Dispatch<React.SetStateAction<boolean>>
 ) {
+  setErrorOriginal(false);
+  setErrorShortened(false);
+
   if (original === "" || shortened === "") {
-    setError("Cannot have empty links!");
-    setSuccess("");
-    return;
-  } else if (
-    !original.includes("http://") &&
-    !original.includes("https://")
-  ) {
-    setError("Must contain `http://` so it redirects properly!!");
-    setSuccess("");
-    return;
+    setNotif({ notif: "Cannot have empty links!", error: true });
+    if (original === "") setErrorOriginal(true);
+    if (shortened === "") setErrorShortened(true);
+  } else if (!original.includes("http://") && !original.includes("https://")) {
+    setNotif({
+      notif: "Must contain `http://` so it redirects properly!",
+      error: true,
+    });
+    setErrorOriginal(true);
   } else if (original.includes("link-short.web.app")) {
-    setError(
-      "Cannot redirect to this site. This is to prevent recursive redirects."
-    );
-    setSuccess("");
-    return;
+    setNotif({
+      notif:
+        "Cannot redirect to this site. This is to prevent recursive redirects.",
+      error: true,
+    });
+    setErrorOriginal(true);
+  } else {
+    let ref = firebase.database().ref(`links/${shortened}`);
+    ref.get().then((snapshot) => {
+      if (snapshot.exists()) {
+        setNotif({ notif: "Shortened has already been taken!", error: true });
+        setErrorShortened(true);
+      }
+      else {
+        ref
+          .set({
+            clicks: 0,
+            direct: original,
+          })
+          .then(() => {
+            setNotif({ notif: "Link Created!", error: false });
+            setTimeout(() => {
+              setNotif({ notif: "", error: false });
+            }, 1000);
+          });
+      }
+    });
   }
-  let ref = firebase.database().ref(`links/${shortened}`);
-  ref.get().then((snapshot) => {
-    if (snapshot.exists()) {
-      setError("URL already exists!");
-      setSuccess("");
-    } else {
-      ref
-        .set({
-          clicks: 0,
-          direct: original,
-        })
-        .then(() => {
-          setError("");
-          setSuccess("Link Created!");
-        });
-    }
-  });
 }
