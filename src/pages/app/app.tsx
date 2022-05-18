@@ -7,6 +7,7 @@ import { Home } from "../home/home";
 import { useState } from "react";
 import Links from "../link/link";
 import "./app.css";
+import Footnote from "../footnote/footnote";
 
 export function App() {
   let [noExist, setNoExist] = useState(false);
@@ -30,6 +31,7 @@ export function App() {
           <Home></Home>
         </Route>
       </Switch>
+      <Footnote/>
     </Router>
   );
 }
