@@ -14,3 +14,7 @@
 #info {
   color: rgba(120, 120, 120, 0.5);
 }
+
+.textfield {
+  text-align: left;
+}

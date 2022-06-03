@@ -18,10 +18,6 @@ export function Home() {
   return (
     <div className="home">
       <h1>Link Shortener</h1>
-      <h3 id="info">
-        "Shortened" is the suffix to the link that will be created:
-        https://link-short.web.app/(your-shortened-link)
-      </h3>
       <div className="form">
         <Stack
           direction="column"
@@ -40,9 +36,9 @@ export function Home() {
           />
 
           <TextField
-            label="Shortened"
-            variant="outlined"
             className="textfield"
+            label="https://link-short.web.app/<shortened>"
+            variant="outlined"
             onChange={(evt) => {
               setShortened(evt.target.value);
             }}
