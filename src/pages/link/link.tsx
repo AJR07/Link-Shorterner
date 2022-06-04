@@ -17,10 +17,17 @@ export default function Links(props: {
         window.location.replace(val.direct);
       });
     } else {
-      setTimeout(() => {
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-      }, 500);
-      props.setNoExist(true);
+      let rickrolls = firebase.database().ref(`rickrolls/${link}`);
+      rickrolls.get().then((snapshot) => {
+        if (snapshot.exists()) {
+          let val2 = snapshot.val();
+          val2.clicks += 1;
+          rickrolls.set(val2);
+        } else {
+          rickrolls.set({ clicks: 1 });
+        }
+        props.setNoExist(true);
+      });
     }
   });
   return (
