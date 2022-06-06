@@ -21,7 +21,7 @@ export default function LinkNoExist() {
         <h2>Link doesn't exist.</h2>
         <video width="750vw" controls autoPlay muted>
           <source
-            src={`http://localhost:3000/ERROR-404.mp4`}
+            src={`http://${window.location.hostname}/ERROR-404.mp4`}
             type="video/mp4"
           />
         </video>
