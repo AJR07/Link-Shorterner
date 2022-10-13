@@ -17,7 +17,7 @@ export function Home() {
 
   return (
     <div className="home">
-      <h1>Link Shortener</h1>
+      <h1 className="center">Link Shortener</h1>
       <div className="form">
         <Stack
           direction="column"
