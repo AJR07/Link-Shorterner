@@ -32,7 +32,9 @@ export default function Links(props: {
   });
   return (
     <div>
-      <h1 style={{ color: "green" }}>Searching...</h1>
+      <h1 className="center" style={{ color: "green" }}>
+        Searching...
+      </h1>
       <LinearProgress color="success" className="progress" />
     </div>
   );

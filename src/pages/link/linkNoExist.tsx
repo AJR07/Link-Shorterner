@@ -5,26 +5,25 @@ import "./link.css";
 
 export default function LinkNoExist() {
   let [noExist, setNoExist] = useState(false);
-  console.log(
-    `${window.location.protocol + window.location.hostname}/ERROR-404.mp4`
-  );
+
+  setTimeout(() => {
+    // redirect
+    window.location.href = "https://youtu.be/dQw4w9WgXcQ?si=cywTyZOgPgleGYsn";
+  }, 3000);
+
   if (noExist) {
     return (
       <div id="app">
-        <h1 style={{ color: "red" }}>ERROR 404</h1>
+        <h1 className="center" style={{ color: "red" }}>
+          ERROR 404
+        </h1>
         <LinearProgress
           variant="determinate"
           value={100}
           color="error"
           className="progress"
         />
-        <h2>Link doesn't exist.</h2>
-        <video width="750vw" controls autoPlay muted>
-          <source
-            src={`http://${window.location.hostname}/ERROR-404.mp4`}
-            type="video/mp4"
-          />
-        </video>
+        <h2 className="center">Link doesn't exist.</h2>
       </div>
     );
   } else {
