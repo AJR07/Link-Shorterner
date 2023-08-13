@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fix": "npx prettier --write .; npm audit fix",
+    "fix": "npx prettier --write .",
     "deploy": "npm run fix; npm run build; firebase deploy;",
     "prepare": "husky install"
   },
@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "husky": "^7.0.0",
-    "node": "^16.0.0",
+    "node": "^16.13.0",
     "prettier": "2.3.2",
     "pretty-quick": "^3.1.3"
   }
