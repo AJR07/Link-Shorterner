@@ -11,5 +11,5 @@ v=${b%%[)| ]*}
 
 export PATH="$NVM_DIR/versions/node/$v/bin:$PATH"
 
-npx pretty-quick --staged
+npx prettier --write .
 git add -A
