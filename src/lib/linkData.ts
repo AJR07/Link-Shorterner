@@ -10,7 +10,7 @@ export default class LinkData {
 		}
 	}
 
-	addLink(linkAlias: string, linkUrl: string) {
+	addLink(linkUrl: string, linkAlias: string) {
 		const link: Link = {
 			url: linkUrl,
 			alias: linkAlias,
@@ -18,7 +18,8 @@ export default class LinkData {
 			uuid: Math.random().toString(36).substring(2, 7)
 		};
 
-		this.links.push(link);
+		this.links = [...this.links, link];
+
 		if (browser) {
 			localStorage.setItem('links', JSON.stringify(this.links));
 		}

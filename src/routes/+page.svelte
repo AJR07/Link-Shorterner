@@ -52,6 +52,7 @@
 		// TODO - check: alias already exists?
 
 		linkData.addLink(longLink, alias);
+		linkData = linkData; // force update
 		longLink = '';
 		alias = '';
 		alert = null;
@@ -62,7 +63,7 @@
 	<Stack
 		override={{
 			margin: '1vw',
-			justifyContent: 'start'
+			justifyContent: 'start',
 		}}
 	>
 		<Stack id="register-alias">
@@ -77,14 +78,14 @@
 			<Button color="green" variant="light" fullSize on:click={() => addLink()}></Button>
 		</Stack>
 		{#if alert}
-			<Alert icon={InfoCircled} title={alert.title} withCloseButton closeButtonLabel="Close alert">
+			<Alert icon={InfoCircled} title={alert.title}>
 				{alert.message}
 			</Alert>
 		{/if}
 
 		<Space override={{ flex: 1 }} />
 
-		<Stack id="view-links" override={{}}>
+		<Stack id="view-links">
 			<Text size="xl" weight="bold">Shortened Links</Text>
 			<Stack
 				override={{
@@ -93,6 +94,8 @@
 					paddingTop: '1vw',
 					paddingBottom: '1vw',
 					transition: 'all 0.2s ease-in-out',
+					flex: "1 1 auto",
+					overflowY: "scroll",
 					'&:hover': {
 						border: '1px solid #777777',
 						backgroundColor: 'rgba(10, 10, 10, 0.4)',
@@ -101,13 +104,13 @@
 				}}
 			>
 				{#each linkData.links as link}
-					<Card>
+					<Card override={{background: "transparent !important", border: "0 !important"}}>
 						<Group position="apart">
-							<Text weight={500}>{`${origin}/${link.alias}`}</Text>
-							<Badge color="yellow" variant="light">{`${link.views}`}</Badge>
+							<Text weight="bold">{`${origin}/${link.alias}`}</Text>
+							<Badge color="yellow" variant="light">{`${link.views} views`}</Badge>
 						</Group>
-						<Text size="sm">
-							{link.url}
+						<Text size="sm" override={{marginTop: "1vh"}}>
+							URL: {link.url}
 						</Text>
 					</Card>
 				{/each}
