@@ -60,11 +60,8 @@
 </script>
 
 <main id="main-container">
-	<Stack
-		override={{
-			margin: '1vw',
-			justifyContent: 'start',
-		}}
+	<div
+		id="right-container"
 	>
 		<Stack id="register-alias">
 			<Text size="xl" weight="bold">Add an alias to a link</Text>
@@ -75,7 +72,7 @@
 				label={`${origin}/`}
 				placeholder="Alias"
 			/>
-			<Button color="green" variant="light" fullSize on:click={() => addLink()}></Button>
+			<Button color="green" variant="light" fullSize on:click={() => addLink()}>Add</Button>
 		</Stack>
 		{#if alert}
 			<Alert icon={InfoCircled} title={alert.title}>
@@ -83,7 +80,7 @@
 			</Alert>
 		{/if}
 
-		<Space override={{ flex: 1 }} />
+		<Space override={{ flex: 1, minHeight: "5vh" }} />
 
 		<Stack id="view-links">
 			<Text size="xl" weight="bold">Shortened Links</Text>
@@ -94,8 +91,6 @@
 					paddingTop: '1vw',
 					paddingBottom: '1vw',
 					transition: 'all 0.2s ease-in-out',
-					flex: "1 1 auto",
-					overflowY: "scroll",
 					'&:hover': {
 						border: '1px solid #777777',
 						backgroundColor: 'rgba(10, 10, 10, 0.4)',
@@ -104,12 +99,12 @@
 				}}
 			>
 				{#each linkData.links as link}
-					<Card override={{background: "transparent !important", border: "0 !important"}}>
+					<Card override={{ background: 'transparent !important', border: '0 !important' }}>
 						<Group position="apart">
 							<Text weight="bold">{`${origin}/${link.alias}`}</Text>
 							<Badge color="yellow" variant="light">{`${link.views} views`}</Badge>
 						</Group>
-						<Text size="sm" override={{marginTop: "1vh"}}>
+						<Text size="sm" override={{ marginTop: '1vh' }}>
 							URL: {link.url}
 						</Text>
 					</Card>
@@ -119,12 +114,12 @@
 				{/if}
 			</Stack>
 		</Stack>
-	</Stack>
+	</div>
 
 	<div id="right-column">
 		<p class="title">Link Shortener</p>
 		<p class="title small">by AJR07</p>
-		
+
 		<img id="link-image" src="/link.png" alt="link" />
 	</div>
 </main>
@@ -157,5 +152,21 @@
 		right: 0;
 		position: absolute;
 		margin: 2vw;
+	}
+
+	#right-container {
+		display: flex;
+		flex-direction: column;
+		margin: 1vw;
+		justify-content: start;
+		overflow-y: scroll;
+
+		/* No Scroll */
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+
+	#right-container::-webkit-scrollbar{
+		display: none;
 	}
 </style>
