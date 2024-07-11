@@ -12,7 +12,7 @@
 	} from '@svelteuidev/core';
 	import { browser } from '$app/environment';
 	import LinkData from '../lib/linkData';
-	import { InfoCircled } from 'radix-icons-svelte';
+	import { InfoCircled, MagnifyingGlass } from 'radix-icons-svelte';
 	import type { AlertType } from '../types/alert';
 
 	let origin: string;
@@ -23,7 +23,8 @@
 	// state variables
 	let longLink = '',
 		alias = '',
-		alert: AlertType | null = null;
+		alert: AlertType | null = null,
+		searchTerm = '';
 
 	// link data
 	let linkData = new LinkData();
@@ -60,9 +61,7 @@
 </script>
 
 <main id="main-container">
-	<div
-		id="right-container"
-	>
+	<div id="right-container">
 		<Stack id="register-alias">
 			<Text size="xl" weight="bold">Add an alias to a link</Text>
 			<TextInput bind:value={longLink} label={'Long Link'} placeholder="Long Link" />
@@ -73,17 +72,16 @@
 				placeholder="Alias"
 			/>
 			<Button color="green" variant="light" fullSize on:click={() => addLink()}>Add</Button>
+			{#if alert}
+				<Alert icon={InfoCircled} title={alert.title}>
+					{alert.message}
+				</Alert>
+			{/if}
 		</Stack>
-		{#if alert}
-			<Alert icon={InfoCircled} title={alert.title}>
-				{alert.message}
-			</Alert>
-		{/if}
-
-		<Space override={{ flex: 1, minHeight: "5vh" }} />
 
 		<Stack id="view-links">
 			<Text size="xl" weight="bold">Shortened Links</Text>
+			<TextInput bind:value={searchTerm} placeholder="Alias To Search" icon={MagnifyingGlass} />
 			<Stack
 				override={{
 					border: '1px solid #222222',
@@ -99,15 +97,19 @@
 				}}
 			>
 				{#each linkData.links as link}
-					<Card override={{ background: 'transparent !important', border: '0 !important' }}>
-						<Group position="apart">
-							<Text weight="bold">{`${origin}/${link.alias}`}</Text>
-							<Badge color="yellow" variant="light">{`${link.views} views`}</Badge>
-						</Group>
-						<Text size="sm" override={{ marginTop: '1vh' }}>
-							URL: {link.url}
-						</Text>
-					</Card>
+					{#if searchTerm === '' || link.alias.includes(searchTerm)}
+						<Card override={{ background: 'transparent !important', border: '0 !important' }}>
+							<Group position="apart">
+								<Text weight="bold">
+									<a href={`${origin}/${link.alias}`}>{`${origin}/${link.alias}`}</a>
+								</Text>
+								<Badge color="yellow" variant="light">{`${link.views} views`}</Badge>
+							</Group>
+							<Text lineClamp={1} size="sm" override={{ marginTop: '1vh' }}>
+								URL: <a href={link.url}>{link.url}</a>
+							</Text>
+						</Card>
+					{/if}
 				{/each}
 				{#if linkData.links.length === 0}
 					<Text align="center">No links registered yet.</Text>
@@ -125,12 +127,15 @@
 </main>
 
 <style>
+	a {
+		color:antiquewhite;
+	}
 	#main-container {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 
 		height: 100vh;
-		background-image: linear-gradient(to bottom right, black, black, rgb(0, 99, 25));
+		background-image: linear-gradient(to bottom right, black, rgb(0, 19, 5), rgb(0, 99, 25));
 	}
 
 	.title {
@@ -157,6 +162,7 @@
 	#right-container {
 		display: flex;
 		flex-direction: column;
+		gap: 1vw;
 		margin: 1vw;
 		justify-content: start;
 		overflow-y: scroll;
@@ -166,7 +172,7 @@
 		scrollbar-width: none; /* Firefox */
 	}
 
-	#right-container::-webkit-scrollbar{
+	#right-container::-webkit-scrollbar {
 		display: none;
 	}
 </style>
