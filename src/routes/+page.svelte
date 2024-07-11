@@ -124,6 +124,8 @@
 	<div id="right-column">
 		<p class="title">Link Shortener</p>
 		<p class="title small">by AJR07</p>
+		
+		<img id="link-image" src="/link.png" alt="link" />
 	</div>
 </main>
 
@@ -147,5 +149,13 @@
 
 	.small {
 		font-size: 40px;
+	}
+
+	#link-image {
+		width: 20vw;
+		bottom: 0;
+		right: 0;
+		position: absolute;
+		margin: 2vw;
 	}
 </style>
