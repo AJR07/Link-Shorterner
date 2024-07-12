@@ -15,7 +15,7 @@ export default class LinkData {
 			url: linkUrl,
 			alias: linkAlias,
 			views: 0,
-			uuid: Math.random().toString(36).substring(2, 7)
+			uuid: Math.random().toString(36)
 		};
 
 		this.links = [...this.links, link];
