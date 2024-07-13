@@ -6,13 +6,13 @@
 		Card,
 		Group,
 		Stack,
-		Space,
 		Text,
-		TextInput
+		TextInput,
+		ActionIcon
 	} from '@svelteuidev/core';
 	import { browser } from '$app/environment';
 	import LinkData from '../lib/linkData';
-	import { InfoCircled, MagnifyingGlass } from 'radix-icons-svelte';
+	import { InfoCircled, MagnifyingGlass, Symbol, CaretSort } from 'radix-icons-svelte';
 	import type { AlertType } from '../types/alert';
 
 	let origin: string;
@@ -89,7 +89,22 @@
 
 		<Stack id="view-links">
 			<Text size="xl" weight="bold">Shortened Links</Text>
-			<TextInput bind:value={searchTerm} placeholder="Alias To Search" icon={MagnifyingGlass} />
+
+			<Group>
+				<TextInput
+					bind:value={searchTerm}
+					placeholder="Alias To Search"
+					icon={MagnifyingGlass}
+					override={{ flexGrow: 2 }}
+				/>
+				<ActionIcon
+					on:click={() => {
+						linkData.syncViewsWithFirebase();
+						linkData = linkData;
+					}}>
+					<Symbol />
+				</ActionIcon>
+			</Group>
 			<Stack
 				override={{
 					border: '1px solid #222222',
