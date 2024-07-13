@@ -1,14 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
-
-const firebaseConfig = {
-  databaseURL: process.env.VITE_DATABASE_URL
-};
+import firebaseConfig from '../firebaseConfig.json';
+import { getFirestore } from "firebase/firestore";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 
 // Initialize Realtime Database and get a reference to the service
-const db = getDatabase(app);
+const db = getFirestore(app);
 export default db;

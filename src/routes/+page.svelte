@@ -50,13 +50,21 @@
 			return;
 		}
 
-		// TODO - check: alias already exists?
-
-		linkData.addLink(longLink, alias);
-		linkData = linkData; // force update
-		longLink = '';
-		alias = '';
-		alert = null;
+		// check: alias already exists
+		linkData
+			.addLink(longLink, alias)
+			.then(() => {
+				linkData = linkData; // force update
+				longLink = '';
+				alias = '';
+				alert = null;
+			})
+			.catch((error) => {
+				alert = {
+					title: 'An Error Occurred',
+					message: error
+				};
+			});
 	}
 </script>
 
@@ -128,7 +136,7 @@
 
 <style>
 	a {
-		color:antiquewhite;
+		color: antiquewhite;
 	}
 	#main-container {
 		display: grid;
