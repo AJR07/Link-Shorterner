@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import type { Link } from '../types/links';
+import uuidv4 from '../utils/uuid';
 
 export default class LinkData {
 	links: Link[] = [];
@@ -15,7 +16,7 @@ export default class LinkData {
 			url: linkUrl,
 			alias: linkAlias,
 			views: 0,
-			uuid: Math.random().toString(36)
+			uuid: uuidv4()
 		};
 
 		this.links = [...this.links, link];
