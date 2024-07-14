@@ -24,7 +24,9 @@
 	let longLink = '',
 		alias = '',
 		alert: AlertType | null = null,
-		searchTerm = '';
+		searchTerm = '',
+		innerWidth = 0,
+		innerHeight = 0;
 
 	// link data
 	let linkData = new LinkData();
@@ -68,8 +70,17 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth bind:innerHeight />
+
 <main id="main-container">
-	<div id="right-container">
+	{#if innerWidth < 750}
+	<div id="right-column">
+		<p class="title">Link Shortener</p>
+		<p class="title small">by AJR07</p>
+	</div>
+	{/if}
+
+	<div id="left-column">
 		<Stack id="register-alias">
 			<Text size="xl" weight="bold">Add an alias to a link</Text>
 			<TextInput bind:value={longLink} label={'Long Link'} placeholder="Long Link" />
@@ -95,7 +106,7 @@
 					bind:value={searchTerm}
 					placeholder="Alias To Search"
 					icon={MagnifyingGlass}
-					override={{ flexGrow: 2 }}
+					override={{ flexGrow: 1 }}
 				/>
 				<ActionIcon
 					on:click={() => {
@@ -123,7 +134,7 @@
 					{#if searchTerm === '' || link.alias.includes(searchTerm)}
 						<Card override={{ background: 'transparent !important', border: '0 !important' }}>
 							<Group position="apart">
-								<Text weight="bold">
+								<Text weight="bold" lineClamp={1} override={{width: "min-content"}}>
 									<a href={`${origin}/${link.alias}`}>{`${origin}/${link.alias}`}</a>
 								</Text>
 								<Badge color="yellow" variant="light">{`${link.views} views`}</Badge>
@@ -141,12 +152,14 @@
 		</Stack>
 	</div>
 
+	{#if innerWidth >= 750}
 	<div id="right-column">
 		<p class="title">Link Shortener</p>
 		<p class="title small">by AJR07</p>
 
 		<img id="link-image" src="/link.png" alt="link" />
 	</div>
+	{/if}
 </main>
 
 <style>
@@ -158,6 +171,7 @@
 		grid-template-columns: 1fr 1fr;
 
 		height: 100vh;
+		width: 100vw;
 		background-image: linear-gradient(to bottom right, black, rgb(0, 19, 5), rgb(0, 99, 25));
 	}
 
@@ -175,18 +189,18 @@
 	}
 
 	#link-image {
-		width: 20vw;
+		width: 20vh;
 		bottom: 0;
 		right: 0;
 		position: absolute;
-		margin: 2vw;
+		margin: 15px;
 	}
 
-	#right-container {
+	#left-column {
 		display: flex;
 		flex-direction: column;
-		gap: 1vw;
-		margin: 1vw;
+		gap: 15px;
+		margin: 15px;
 		justify-content: start;
 		overflow-y: scroll;
 
@@ -195,7 +209,47 @@
 		scrollbar-width: none; /* Firefox */
 	}
 
-	#right-container::-webkit-scrollbar {
+	#left-column::-webkit-scrollbar {
 		display: none;
+	}
+
+	#right-column {
+		height: fit-content !important
+	}
+
+	@media only screen and (max-width: 750px) {
+		#main-container {
+			grid-template-columns: 1fr;
+			padding: 10px;
+			width: calc(100vw - 20px);
+			overflow: scroll;
+		}
+
+		.title {
+			font-size: 50px;
+			margin-right: 0;
+			text-align: center;
+		}
+
+		.small {
+			font-size: 30px;
+		}
+
+		#left-column {
+			width: calc(100vw - 30px);
+			height: 100vh;
+			margin: 5px;
+			overflow: unset;
+		}
+
+		@media only screen and (max-width: 400px) {
+			.title {
+				font-size: 40px;
+			}
+
+			.small {
+				font-size: 20px;
+			}
+		}
 	}
 </style>
