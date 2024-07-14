@@ -26,7 +26,8 @@
 		alert: AlertType | null = null,
 		searchTerm = '',
 		innerWidth = 0,
-		innerHeight = 0;
+		innerHeight = 0,
+		overflowButton = false;
 
 	// link data
 	let linkData = new LinkData();
@@ -134,7 +135,7 @@
 					{#if searchTerm === '' || link.alias.includes(searchTerm)}
 						<Card override={{ background: 'transparent !important', border: '0 !important' }}>
 							<Group position="apart">
-								<Text weight="bold" lineClamp={1} override={{width: "min-content"}}>
+								<Text weight="bold">
 									<a href={`${origin}/${link.alias}`}>{`${origin}/${link.alias}`}</a>
 								</Text>
 								<Badge color="yellow" variant="light">{`${link.views} views`}</Badge>
@@ -237,7 +238,6 @@
 
 		#left-column {
 			width: calc(100vw - 30px);
-			height: 100vh;
 			margin: 5px;
 			overflow: unset;
 		}
